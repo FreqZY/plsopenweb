@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine's Day Proposal</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-image: url('https://www.transparenttextures.com/patterns/debut-light.png');
+        margin: 0;
+        padding: 0;
+    }
+    #proposal {
+        font-size: 24px;
+        margin-bottom: 20px;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    }
+    #proposalText {
+        font-size: 36px;
+        color: #ff80aa;
+    }
+    #choices {
+        margin-top: 20px;
+    }
+    button {
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 0 10px;
+        font-size: 16px;
+        transition: transform 0.3s ease;
+    }
+    #yesButton {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+    }
+    #noButton {
+        background-color: #f44336; /* Red */
+        border: none;
+        color: white;
+    }
+    #yesButton:hover, #noButton:hover {
+        transform: scale(1.1);
+    }
+    .confetti {
+    position: absolute;
+    background-image: url('file:///C:/Users/Sean/Desktop/yes/heart.png'); /* Updated path */
+    width: 20px;
+    height: 20px;
+    animation: confetti-fall 3s linear infinite;
+    }
+
+    @keyframes confetti-fall {
+        0% { transform: translateY(-100vh) rotateZ(0deg); }
+        100% { transform: translateY(100vh) rotateZ(360deg); }
+    }
+    .image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+    .image {
+        display: none;
+    }
+</style>
+</head>
+<body>
+<div id="proposal">
+    <p id="proposalText">Will you be my gf?</p>
+    <div id="choices">
+        <button id="yesButton" onclick="respond(true)">Yes</button>
+        <button id="noButton" onclick="respond(false)">No</button>
+    </div>
+</div>
+<div class="image-container">
+    <img id="bearheart" class="image" src="bearheart.gif" alt="Default Image" style="display: block;">
+    <img id="sadbear" class="image" src="sadbearr.gif" alt="No Image">
+    <img id="bearhug" class="image" src="bearhug.gif" alt="Yes Image">
+</div>
+
+<script>
+var responseIndex = 0;
+var images = document.querySelectorAll('.image');
+
+function respond(answer) {
+    var proposalText = document.getElementById("proposalText");
+    var yesButton = document.getElementById('yesButton');
+    var noButton = document.getElementById('noButton');
+
+    if (answer) {
+        proposalText.textContent = "Yipee!!!!!!";
+        yesButton.style.fontSize = (16 + responseIndex * 2) + 'px';
+        responseIndex++;
+        showImage('bearhug');
+        hideImage('sadbear');
+        hideImage('bearheart');
+        createConfetti();
+        yesButton.disabled = true;
+        noButton.disabled = true;
+    } else {
+        proposalText.textContent = responses[responseIndex % responses.length];
+        yesButton.style.fontSize = (16 + responseIndex * 2) + 'px';
+        responseIndex++;
+        showImage('sadbear');
+        hideImage('bearhug');
+        hideImage('bearheart');
+    }
+}
+
+function showImage(imageId) {
+    var image = document.getElementById(imageId);
+    image.style.display = 'block';
+}
+
+function hideImage(imageId) {
+    var image = document.getElementById(imageId);
+    image.style.display = 'none';
+}
+
+var responses = ["Are you sure?", "Please think carefully", "PLSSS", "I'LL DO ANYTHING", "STOP SAYING NO:("];
+
+function createConfetti() {
+    for (var i = 0; i < 100; i++) {
+        var confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * window.innerWidth + 'px';
+        confetti.style.animationDelay = Math.random() * 3 + 's';
+        document.body.appendChild(confetti);
+    }
+}
+</script>
+</body>
+</html>
